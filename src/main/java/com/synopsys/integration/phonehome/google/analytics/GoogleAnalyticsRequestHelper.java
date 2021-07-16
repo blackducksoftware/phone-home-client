@@ -32,14 +32,6 @@ public class GoogleAnalyticsRequestHelper {
         this.gson = gson;
     }
 
-    public HttpPost createRequest(PhoneHomeRequestBody phoneHomeRequestBody) throws UnsupportedEncodingException {
-        return createRequest(phoneHomeRequestBody, null, GoogleAnalyticsConstants.PRODUCTION_INTEGRATIONS_TRACKING_ID);
-    }
-
-    public HttpPost createRequest(PhoneHomeRequestBody phoneHomeRequestBody, String url) throws UnsupportedEncodingException {
-        return createRequest(phoneHomeRequestBody, url, GoogleAnalyticsConstants.PRODUCTION_INTEGRATIONS_TRACKING_ID);
-    }
-
     public HttpPost createRequest(PhoneHomeRequestBody phoneHomeRequestBody, String url, String trackingId) throws UnsupportedEncodingException {
         GoogleAnalyticsRequestTransformer transformer = new GoogleAnalyticsRequestTransformer(gson, trackingId, phoneHomeRequestBody);
         List<NameValuePair> parameters = transformer.getParameters();
