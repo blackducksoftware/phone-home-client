@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.synopsys.integration.log.IntLogger;
 import com.synopsys.integration.phonehome.exception.PhoneHomeException;
 import com.synopsys.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
+import com.synopsys.integration.phonehome.google.analytics.TrackingId;
 import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
 
 import org.apache.commons.lang3.BooleanUtils;
@@ -31,9 +32,13 @@ public class PhoneHomeClient {
     private final HttpClientBuilder httpClientBuilder;
     private final IntLogger logger;
     private final Gson gson;
-    private final String trackingId;
+    private final TrackingId trackingId;
 
     public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, String trackingId) {
+        this(logger, httpClientBuilder, gson, new TrackingId(trackingId));
+    }
+
+    public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, TrackingId trackingId) {
         this.httpClientBuilder = httpClientBuilder;
         this.logger = logger;
         this.gson = gson;
@@ -56,7 +61,7 @@ public class PhoneHomeClient {
             if (overrideUrl != null) {
                 logger.debug("Overriding Phone-Home URL: " + overrideUrl);
             }
-            HttpUriRequest request = requestHelper.createRequest(phoneHomeRequestBody, overrideUrl, trackingId);
+            HttpUriRequest request = requestHelper.createRequest(phoneHomeRequestBody, overrideUrl, trackingId.getId());
 
             logger.debug("Phoning home to " + request.getURI());
             HttpResponse response = client.execute(request);
