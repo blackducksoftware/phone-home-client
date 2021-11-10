@@ -1,9 +1,11 @@
 package com.synopsys.integration.phonehome.google.analytics;
 
-import com.google.gson.Gson;
-import com.synopsys.integration.log.LogLevel;
-import com.synopsys.integration.log.PrintStreamIntLogger;
-import com.synopsys.integration.phonehome.request.PhoneHomeRequestBodyBuilder;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -11,11 +13,10 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-
-import static org.junit.Assert.assertEquals;
+import com.google.gson.Gson;
+import com.synopsys.integration.log.LogLevel;
+import com.synopsys.integration.log.PrintStreamIntLogger;
+import com.synopsys.integration.phonehome.request.PhoneHomeRequestBodyBuilder;
 
 public class GoogleAnalyticsRequestHelperTest {
     private static final PrintStreamIntLogger logger = new PrintStreamIntLogger(System.out, LogLevel.TRACE);

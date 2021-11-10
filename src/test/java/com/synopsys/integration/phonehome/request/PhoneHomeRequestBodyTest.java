@@ -1,14 +1,15 @@
 package com.synopsys.integration.phonehome.request;
 
-import com.synopsys.integration.phonehome.UniquePhoneHomeProduct;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import com.synopsys.integration.phonehome.UniquePhoneHomeProduct;
 
 public class PhoneHomeRequestBodyTest {
     @Test
