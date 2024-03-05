@@ -34,8 +34,8 @@ public class PhoneHomeClient {
     private final Gson gson;
     private final MeasurementID measurementID;
 
-    public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, String trackingId) {
-        this(logger, httpClientBuilder, gson, new MeasurementID(trackingId));
+    public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, String measurementID) {
+        this(logger, httpClientBuilder, gson, new MeasurementID(measurementID));
     }
 
     public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, MeasurementID measurementID) {
