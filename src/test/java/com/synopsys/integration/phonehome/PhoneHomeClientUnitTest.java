@@ -30,14 +30,14 @@ public class PhoneHomeClientUnitTest {
         logger.info("Test Class: PhoneHomeClientUnitTest");
         defaultEnvironmentVariables = new HashMap<>();
         defaultEnvironmentVariables.put(PhoneHomeClient.PHONE_HOME_URL_OVERRIDE_VARIABLE, GoogleAnalyticsConstants.BASE_URL + GoogleAnalyticsConstants.DEBUG_ENDPOINT);
-        defaultClient = new PhoneHomeClient(logger, HttpClientBuilder.create(), new Gson(), GoogleAnalyticsConstants.TEST_INTEGRATIONS_TRACKING_ID);
+        defaultClient = new PhoneHomeClient(logger, HttpClientBuilder.create(), new Gson(), GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
     }
 
     @Test
     public void callHomeIntegrationsTest() throws Exception {
         PhoneHomeRequestBody phoneHomeRequest = PhoneHomeRequestBodyBuilder
-                .createForProduct(UniquePhoneHomeProduct.CODE_CENTER, "artifactId", "customerId", "hostName", "artifactVersion", "productVersion")
-                .build();
+            .createForProduct(UniquePhoneHomeProduct.CODE_CENTER, "artifactId", "customerId", "hostName", "artifactVersion", "productVersion")
+            .build();
 
         defaultClient.postPhoneHomeRequest(phoneHomeRequest, defaultEnvironmentVariables);
     }
@@ -45,11 +45,11 @@ public class PhoneHomeClientUnitTest {
     @Test
     public void callHomeSkip() throws Exception {
         BufferedIntLogger logger = new BufferedIntLogger();
-        PhoneHomeClient clientWithTrackableLogger = new PhoneHomeClient(logger, HttpClientBuilder.create(), new Gson(), GoogleAnalyticsConstants.TEST_INTEGRATIONS_TRACKING_ID);
+        PhoneHomeClient clientWithTrackableLogger = new PhoneHomeClient(logger, HttpClientBuilder.create(), new Gson(), GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
 
         PhoneHomeRequestBody phoneHomeRequest = PhoneHomeRequestBodyBuilder
-                .createForProduct(UniquePhoneHomeProduct.CODE_CENTER, "artifactId", "customerId", "hostName", "artifactVersion", "productVersion")
-                .build();
+            .createForProduct(UniquePhoneHomeProduct.CODE_CENTER, "artifactId", "customerId", "hostName", "artifactVersion", "productVersion")
+            .build();
 
         defaultEnvironmentVariables.put(PhoneHomeClient.SKIP_PHONE_HOME_VARIABLE, "true");
 
