@@ -8,8 +8,8 @@
 package com.synopsys.integration.phonehome.google.analytics;
 
 public class TrackingId {
-    public static final TrackingId PRODUCTION = new TrackingId(GoogleAnalyticsConstants.PRODUCTION_INTEGRATIONS_TRACKING_ID);
-    public static final TrackingId TEST = new TrackingId(GoogleAnalyticsConstants.TEST_INTEGRATIONS_TRACKING_ID);
+    public static final TrackingId PRODUCTION = new TrackingId(GoogleAnalyticsConstants.PRODUCTION_GA4_MEASUREMENT_ID);
+    public static final TrackingId TEST = new TrackingId(GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
 
     private final String id;
 
