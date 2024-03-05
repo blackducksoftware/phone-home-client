@@ -8,32 +8,35 @@
 package com.synopsys.integration.phonehome.google.analytics;
 
 public class GoogleAnalyticsConstants {
-    // Google Tracking ID
-    public static final String PRODUCTION_INTEGRATIONS_TRACKING_ID = "UA-116682967-1";
-    public static final String TEST_INTEGRATIONS_TRACKING_ID = "UA-116682967-2";
+    // Google Measurement IDs
+    public static final String PRODUCTION_GA4_MEASUREMENT_ID = "production-measurement-id";
+    public static final String TEST_GA4_MEASUREMENT_ID = "test-measurement-id";
+
+    // GA4 API Secrets (to be exported from this class into a secret manager)
+    public static final String TEST_GA4_API_SECRET = "dummy-secret";
 
     // Api Path(s)
     public static final String BASE_URL = "https://www.google-analytics.com";
-    public static final String COLLECT_ENDPOINT = "/collect";
+    public static final String COLLECT_ENDPOINT = "/mp/collect";
     public static final String BATCH_ENDPOINT = "/batch";
     public static final String DEBUG_ENDPOINT = "/debug" + COLLECT_ENDPOINT;
 
-    // Payload Data - Required
-    public static final String API_VERSION_KEY = "v";
-    public static final String HIT_TYPE_KEY = "t";
-    public static final String CLIENT_ID_KEY = "cid";
-    public static final String USER_ID_KEY = "uid";
-    public static final String TRACKING_ID_KEY = "tid";
-    public static final String DOCUMENT_PATH_KEY = "dp";
+    // Payload Data - Keys used in the request body's JSON
+    public static final String REQUEST_CLIENT_ID_KEY = "client_id";
+    public static final String REQUEST_EVENTS_KEY = "events";
+    public static final String EVENT_NAME_KEY = "name";
+    public static final String EVENT_PARAMS_KEY = "params";
+
 
     // Payload Data - Custom Dimensions
-    public static final String CUSTOMER_ID = "cd1";
-    public static final String ARTIFACT_ID = "cd2";
-    public static final String ARTIFACT_VERSION = "cd3";
-    public static final String PRODUCT_ID = "cd4";
-    public static final String PRODUCT_VERSION = "cd5";
-    public static final String META_DATA = "cd6";
-    public static final String HOST_NAME = "cd7";
-    public static final String MODULE_ID = "cd8";
+    public static final String CUSTOMER_ID = "customer_id";
+    public static final String ARTIFACT_ID = "artifact_id";
+    public static final String ARTIFACT_VERSION = "artifact_version";
+    public static final String PRODUCT_ID = "product_id";
+    public static final String PRODUCT_VERSION = "product_version";
+    public static final String META_DATA = "metadata";
+    public static final String HOST_NAME = "host_name";
+    public static final String MODULE_ID = "module_id";
+    public static final String HIT_DATE = "hit_date";
 
 }
