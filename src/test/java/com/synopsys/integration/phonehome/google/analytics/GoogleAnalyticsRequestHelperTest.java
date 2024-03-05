@@ -39,7 +39,7 @@ public class GoogleAnalyticsRequestHelperTest {
 
         GoogleAnalyticsRequestHelper helper = new GoogleAnalyticsRequestHelper(new Gson());
 
-        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
+        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, GoogleAnalyticsConstants.TEST_GA4_API_SECRET, GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
         BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getEntity().getContent()));
 
         String nextRequestLine;
@@ -66,7 +66,7 @@ public class GoogleAnalyticsRequestHelperTest {
 
         GoogleAnalyticsRequestHelper helper = new GoogleAnalyticsRequestHelper(new Gson());
 
-        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
+        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, GoogleAnalyticsConstants.TEST_GA4_API_SECRET, GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
         BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getEntity().getContent()));
 
         String nextRequestLine;

@@ -27,18 +27,20 @@ public class GoogleAnalyticsRequestTransformer {
     private final List<NameValuePair> parameters = new ArrayList<>();
     private JsonObject payload = new JsonObject();
     private final PhoneHomeRequestBody phoneHomeRequestBody;
-    private final String trackingId;
+    private final String measurementId;
+    private final String apiSecret;
     private final Gson gson;
 
-    public GoogleAnalyticsRequestTransformer(Gson gson, String trackingId, PhoneHomeRequestBody phoneHomeRequestBody) {
+    public GoogleAnalyticsRequestTransformer(Gson gson, String apiSecret, String measurementId, PhoneHomeRequestBody phoneHomeRequestBody) {
         this.gson = gson;
         this.phoneHomeRequestBody = phoneHomeRequestBody;
-        this.trackingId = trackingId;
+        this.apiSecret = apiSecret;
+        this.measurementId = measurementId;
     }
 
     public List<NameValuePair> getParameters() {
-        addParameter("api_secret", GoogleAnalyticsConstants.TEST_GA4_API_SECRET);
-        addParameter("measurement_id", GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
+        addParameter("api_secret", apiSecret);
+        addParameter("measurement_id", measurementId);
         return parameters;
     }
 

@@ -30,7 +30,7 @@ public class GoogleAnalyticsRequestHelper {
         this.gson = gson;
     }
 
-    public HttpPost createRequest(PhoneHomeRequestBody phoneHomeRequestBody, String overrideUrl, String trackingId) throws UnsupportedEncodingException, URISyntaxException {
+    public HttpPost createRequest(PhoneHomeRequestBody phoneHomeRequestBody, String overrideUrl, String apiSecret, String measurementId) throws UnsupportedEncodingException, URISyntaxException {
 
         // Determine the request endpoint
         String requestUrl = overrideUrl;
@@ -40,7 +40,7 @@ public class GoogleAnalyticsRequestHelper {
         URIBuilder uriBuilder = new URIBuilder(requestUrl);
 
         // This transformer class provides access to manipulate/retrieve the query parameters and payload for requests to GA4
-        GoogleAnalyticsRequestTransformer transformer = new GoogleAnalyticsRequestTransformer(gson, trackingId, phoneHomeRequestBody);
+        GoogleAnalyticsRequestTransformer transformer = new GoogleAnalyticsRequestTransformer(gson, apiSecret, measurementId, phoneHomeRequestBody);
 
         // Build the GA4 server URI with the required query parameters
         List<NameValuePair> parameters = transformer.getParameters();

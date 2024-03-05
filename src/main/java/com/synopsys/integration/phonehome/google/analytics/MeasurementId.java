@@ -7,13 +7,13 @@
  */
 package com.synopsys.integration.phonehome.google.analytics;
 
-public class MeasurementID {
-    public static final MeasurementID PRODUCTION = new MeasurementID(GoogleAnalyticsConstants.PRODUCTION_GA4_MEASUREMENT_ID);
-    public static final MeasurementID TEST = new MeasurementID(GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
+public class MeasurementId {
+    public static final MeasurementId PRODUCTION = new MeasurementId(GoogleAnalyticsConstants.PRODUCTION_GA4_MEASUREMENT_ID);
+    public static final MeasurementId TEST = new MeasurementId(GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
 
     private final String id;
 
-    public MeasurementID(String id) {
+    public MeasurementId(String id) {
         this.id = id;
     }
 
