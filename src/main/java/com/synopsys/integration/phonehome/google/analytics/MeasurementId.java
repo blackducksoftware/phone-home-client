@@ -8,8 +8,6 @@
 package com.synopsys.integration.phonehome.google.analytics;
 
 public class MeasurementId {
-    public static final MeasurementId PRODUCTION = new MeasurementId(GoogleAnalyticsConstants.PRODUCTION_GA4_MEASUREMENT_ID);
-    public static final MeasurementId TEST = new MeasurementId(GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
 
     private final String id;
 

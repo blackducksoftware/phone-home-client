@@ -60,15 +60,6 @@ public class GoogleAnalyticsRequestHelper {
         return httpPost;
     }
 
-    public HttpPost createRequest(String url, HttpEntity httpEntity) {
-        HttpPost post = new HttpPost(url);
-
-        post.setEntity(httpEntity);
-        // TODO post.addHeader(HttpHeaders.ACCEPT, ContentType.TEXT_PLAIN.getMimeType());
-
-        return post;
-    }
-
     private List<NameValuePair> createModuleParameters(List<NameValuePair> parameters, String module) {
         NameValuePair parameter = new BasicNameValuePair(GoogleAnalyticsConstants.MODULE_ID, module);
         List<NameValuePair> newParameters = new ArrayList<>(parameters);
