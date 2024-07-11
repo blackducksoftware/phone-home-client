@@ -10,16 +10,13 @@ package com.synopsys.integration.phonehome.google.analytics;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.sun.org.apache.bcel.internal.generic.FieldGenOrMethodGen;
 import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -64,7 +61,7 @@ public class GoogleAnalyticsRequestTransformer {
         eventParams.addProperty(GoogleAnalyticsConstants.HIT_DATE, getFormattedHitDate());
 
         JsonObject eventObject = new JsonObject();
-        eventObject.addProperty(GoogleAnalyticsConstants.EVENT_NAME_KEY, "bd_hit_from_phone_home_lib_2");
+        eventObject.addProperty(GoogleAnalyticsConstants.EVENT_NAME_KEY, "bd_hit");
         eventObject.add(GoogleAnalyticsConstants.EVENT_PARAMS_KEY, eventParams);
 
         JsonArray eventsArray = new JsonArray();
