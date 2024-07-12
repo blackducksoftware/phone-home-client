@@ -8,12 +8,6 @@
 package com.synopsys.integration.phonehome.google.analytics;
 
 public class GoogleAnalyticsConstants {
-    // Google Measurement IDs
-    public static final String PRODUCTION_GA4_MEASUREMENT_ID = "production-measurement-id";
-    public static final String TEST_GA4_MEASUREMENT_ID = "test-measurement-id";
-
-    // GA4 API Secrets (to be exported from this class into a secret manager)
-    public static final String TEST_GA4_API_SECRET = "dummy-secret";
 
     // Api Path(s)
     public static final String BASE_URL = "https://www.google-analytics.com";

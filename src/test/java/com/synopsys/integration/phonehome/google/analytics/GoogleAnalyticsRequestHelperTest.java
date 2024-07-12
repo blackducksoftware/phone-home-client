@@ -20,6 +20,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class GoogleAnalyticsRequestHelperTest {
     private static final PrintStreamIntLogger logger = new PrintStreamIntLogger(System.out, LogLevel.TRACE);
+    public static final String TEST_GA4_MEASUREMENT_ID = "test-measurement-id";
+    public static final String TEST_GA4_API_SECRET = "dummy-secret";
 
     @BeforeEach
     public void init() {
@@ -39,7 +41,7 @@ public class GoogleAnalyticsRequestHelperTest {
 
         GoogleAnalyticsRequestHelper helper = new GoogleAnalyticsRequestHelper(new Gson());
 
-        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, GoogleAnalyticsConstants.TEST_GA4_API_SECRET, GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
+        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, TEST_GA4_API_SECRET, TEST_GA4_MEASUREMENT_ID);
         BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getEntity().getContent()));
 
         String nextRequestLine;
@@ -52,6 +54,7 @@ public class GoogleAnalyticsRequestHelperTest {
 
         int responseCode = response.getStatusLine().getStatusCode();
         logger.info("Response Code: " + responseCode);
+        /* /mp/collect endpoint returns 204 status code */
         assertEquals(204, responseCode);
     }
 
@@ -66,7 +69,7 @@ public class GoogleAnalyticsRequestHelperTest {
 
         GoogleAnalyticsRequestHelper helper = new GoogleAnalyticsRequestHelper(new Gson());
 
-        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, GoogleAnalyticsConstants.TEST_GA4_API_SECRET, GoogleAnalyticsConstants.TEST_GA4_MEASUREMENT_ID);
+        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, TEST_GA4_API_SECRET, TEST_GA4_MEASUREMENT_ID);
         BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getEntity().getContent()));
 
         String nextRequestLine;
