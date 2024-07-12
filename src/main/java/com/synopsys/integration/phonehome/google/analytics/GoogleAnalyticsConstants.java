@@ -12,7 +12,6 @@ public class GoogleAnalyticsConstants {
     // Api Path(s)
     public static final String BASE_URL = "https://www.google-analytics.com";
     public static final String COLLECT_ENDPOINT = "/mp/collect";
-    public static final String BATCH_ENDPOINT = "/batch";
     public static final String DEBUG_ENDPOINT = "/debug" + COLLECT_ENDPOINT;
 
     // Payload Data - Keys used in the request body's JSON

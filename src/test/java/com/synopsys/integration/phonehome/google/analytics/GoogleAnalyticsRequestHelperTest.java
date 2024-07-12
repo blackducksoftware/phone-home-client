@@ -57,43 +57,4 @@ public class GoogleAnalyticsRequestHelperTest {
         /* /mp/collect endpoint returns 204 status code */
         assertEquals(204, responseCode);
     }
-
-    //    @Test
-    public void batchRequestTest() throws IOException, URISyntaxException {
-        final String debugUrl = GoogleAnalyticsConstants.BASE_URL + GoogleAnalyticsConstants.COLLECT_ENDPOINT;
-
-        PhoneHomeRequestBodyBuilder phoneHomeRequestBodyBuilder = PhoneHomeRequestBodyBuilder.createForBlackDuck("fake_artifact_id", "fake_customer_id", "fake_host_name", "fake_artifact_version", "fake_product_version");
-        phoneHomeRequestBodyBuilder.addToMetaData("exampleMetaData_1", "data");
-        phoneHomeRequestBodyBuilder.addToMetaData("exampleMetaData_2", "other Data");
-        phoneHomeRequestBodyBuilder.addArtifactModules("fake_module_1", "fake_module_2", "fake_module_3");
-
-        GoogleAnalyticsRequestHelper helper = new GoogleAnalyticsRequestHelper(new Gson());
-
-        HttpPost request = helper.createRequest(phoneHomeRequestBodyBuilder.build(), debugUrl, TEST_GA4_API_SECRET, TEST_GA4_MEASUREMENT_ID);
-        BufferedReader requestReader = new BufferedReader(new InputStreamReader(request.getEntity().getContent()));
-
-        String nextRequestLine;
-        while ((nextRequestLine = requestReader.readLine()) != null) {
-            logger.info(nextRequestLine);
-        }
-
-        CloseableHttpResponse response;
-        try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
-            response = client.execute(request);
-        }
-
-        int responseCode = response.getStatusLine().getStatusCode();
-        logger.info("Response Code: " + responseCode);
-
-        String nextLine;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-
-        logger.info("Response String:");
-        while ((nextLine = reader.readLine()) != null) {
-            logger.info(nextLine);
-        }
-
-        assertEquals(200, responseCode);
-    }
-
 }
