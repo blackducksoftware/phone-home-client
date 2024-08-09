@@ -18,6 +18,7 @@ public class GoogleAnalyticsConstants {
     public static final String REQUEST_CLIENT_ID_KEY = "client_id";
     public static final String REQUEST_EVENTS_KEY = "events";
     public static final String EVENT_NAME_KEY = "name";
+    public static final String EVENT_NAME_VALUE = "bd_hit";
     public static final String EVENT_PARAMS_KEY = "params";
 
 

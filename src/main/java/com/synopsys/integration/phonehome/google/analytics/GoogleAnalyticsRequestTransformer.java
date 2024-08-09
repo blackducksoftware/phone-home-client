@@ -61,7 +61,7 @@ public class GoogleAnalyticsRequestTransformer {
         eventParams.addProperty(GoogleAnalyticsConstants.HIT_DATE, getFormattedHitDate());
 
         JsonObject eventObject = new JsonObject();
-        eventObject.addProperty(GoogleAnalyticsConstants.EVENT_NAME_KEY, "bd_hit");
+        eventObject.addProperty(GoogleAnalyticsConstants.EVENT_NAME_KEY, GoogleAnalyticsConstants.EVENT_NAME_VALUE);
         eventObject.add(GoogleAnalyticsConstants.EVENT_PARAMS_KEY, eventParams);
 
         JsonArray eventsArray = new JsonArray();
