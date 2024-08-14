@@ -8,45 +8,69 @@
 package com.synopsys.integration.phonehome.google.analytics;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class GoogleAnalyticsRequestTransformer {
     private final List<NameValuePair> parameters = new ArrayList<>();
+    private JsonObject payload = new JsonObject();
     private final PhoneHomeRequestBody phoneHomeRequestBody;
-    private final String trackingId;
+    private final String measurementId;
+    private final String apiSecret;
     private final Gson gson;
 
-    public GoogleAnalyticsRequestTransformer(Gson gson, String trackingId, PhoneHomeRequestBody phoneHomeRequestBody) {
+    public GoogleAnalyticsRequestTransformer(Gson gson, String apiSecret, String measurementId, PhoneHomeRequestBody phoneHomeRequestBody) {
         this.gson = gson;
         this.phoneHomeRequestBody = phoneHomeRequestBody;
-        this.trackingId = trackingId;
+        this.apiSecret = apiSecret;
+        this.measurementId = measurementId;
     }
 
     public List<NameValuePair> getParameters() {
-        addParameter(GoogleAnalyticsConstants.API_VERSION_KEY, "1");
-        addParameter(GoogleAnalyticsConstants.HIT_TYPE_KEY, "pageview");
-
-        String clientId = generateClientId(phoneHomeRequestBody.getCustomerId(), phoneHomeRequestBody.getHostName());
-        addParameter(GoogleAnalyticsConstants.CLIENT_ID_KEY, clientId);
-        addParameter(GoogleAnalyticsConstants.TRACKING_ID_KEY, trackingId);
-        addParameter(GoogleAnalyticsConstants.DOCUMENT_PATH_KEY, "phone-home");
-
-        // Phone Home Parameters
-        addParameter(GoogleAnalyticsConstants.CUSTOMER_ID, phoneHomeRequestBody.getCustomerId());
-        addParameter(GoogleAnalyticsConstants.HOST_NAME, phoneHomeRequestBody.getHostName());
-        addParameter(GoogleAnalyticsConstants.ARTIFACT_ID, phoneHomeRequestBody.getArtifactId());
-        addParameter(GoogleAnalyticsConstants.ARTIFACT_VERSION, phoneHomeRequestBody.getArtifactVersion());
-        addParameter(GoogleAnalyticsConstants.PRODUCT_ID, phoneHomeRequestBody.getProductName());
-        addParameter(GoogleAnalyticsConstants.PRODUCT_VERSION, phoneHomeRequestBody.getProductVersion());
-        addParameter(GoogleAnalyticsConstants.META_DATA, gson.toJson(phoneHomeRequestBody.getMetaData()));
-
+        addParameter("api_secret", apiSecret);
+        addParameter("measurement_id", measurementId);
         return parameters;
+    }
+
+    private String getFormattedHitDate() {
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        return currentDate.format(dateTimeFormatter);
+    }
+
+    public JsonObject getPayload() {
+        String clientId = generateClientId(phoneHomeRequestBody.getCustomerId(), phoneHomeRequestBody.getHostName());
+
+        JsonObject eventParams = new JsonObject();
+        eventParams.addProperty(GoogleAnalyticsConstants.CUSTOMER_ID, phoneHomeRequestBody.getCustomerId());
+        eventParams.addProperty(GoogleAnalyticsConstants.ARTIFACT_ID, phoneHomeRequestBody.getArtifactId());
+        eventParams.addProperty(GoogleAnalyticsConstants.ARTIFACT_VERSION, phoneHomeRequestBody.getArtifactVersion());
+        eventParams.addProperty(GoogleAnalyticsConstants.HOST_NAME, phoneHomeRequestBody.getHostName());
+        eventParams.addProperty(GoogleAnalyticsConstants.META_DATA, gson.toJson(phoneHomeRequestBody.getMetaData()));
+        eventParams.addProperty(GoogleAnalyticsConstants.PRODUCT_ID, phoneHomeRequestBody.getProductName());
+        eventParams.addProperty(GoogleAnalyticsConstants.PRODUCT_VERSION, phoneHomeRequestBody.getProductVersion());
+        eventParams.addProperty(GoogleAnalyticsConstants.HIT_DATE, getFormattedHitDate());
+
+        JsonObject eventObject = new JsonObject();
+        eventObject.addProperty(GoogleAnalyticsConstants.EVENT_NAME_KEY, GoogleAnalyticsConstants.EVENT_NAME_VALUE);
+        eventObject.add(GoogleAnalyticsConstants.EVENT_PARAMS_KEY, eventParams);
+
+        JsonArray eventsArray = new JsonArray();
+        eventsArray.add(eventObject);
+
+        payload.addProperty(GoogleAnalyticsConstants.REQUEST_CLIENT_ID_KEY, clientId);
+        payload.add(GoogleAnalyticsConstants.REQUEST_EVENTS_KEY, eventsArray);
+
+        return payload;
     }
 
     private void addParameter(String key, String value) {

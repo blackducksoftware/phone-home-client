@@ -8,22 +8,20 @@
 package com.synopsys.integration.phonehome.google.analytics;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.utils.URLEncodedUtils;
-import org.apache.http.entity.AbstractHttpEntity;
+import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.UnsupportedEncodingException;
-import java.nio.charset.StandardCharsets;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class GoogleAnalyticsRequestHelper {
     private final Gson gson;
@@ -32,45 +30,34 @@ public class GoogleAnalyticsRequestHelper {
         this.gson = gson;
     }
 
-    public HttpPost createRequest(PhoneHomeRequestBody phoneHomeRequestBody, String url, String trackingId) throws UnsupportedEncodingException {
-        GoogleAnalyticsRequestTransformer transformer = new GoogleAnalyticsRequestTransformer(gson, trackingId, phoneHomeRequestBody);
-        List<NameValuePair> parameters = transformer.getParameters();
-        AbstractHttpEntity entity;
-        String requestUrl = url;
+    public HttpPost createRequest(PhoneHomeRequestBody phoneHomeRequestBody, String overrideUrl, String apiSecret, String measurementId) throws UnsupportedEncodingException, URISyntaxException {
 
-        // Not in the transformer because this will likely go away -- rotte 8/6/2019
-        List<String> artifactModules = phoneHomeRequestBody.getArtifactModules();
-
-        if (artifactModules == null || artifactModules.size() == 0) {
-            if (StringUtils.isBlank(requestUrl)) {
-                requestUrl = GoogleAnalyticsConstants.BASE_URL + GoogleAnalyticsConstants.COLLECT_ENDPOINT;
-            }
-
-            entity = new UrlEncodedFormEntity(parameters);
-        } else {
-            String requestString = artifactModules.stream()
-                    .map(module -> createModuleParameters(parameters, module))
-                    .map(moduleParameters -> URLEncodedUtils.format(moduleParameters, StandardCharsets.ISO_8859_1))
-                    .collect(Collectors.joining("\n"));
-
-            if (StringUtils.isBlank(requestUrl)) {
-                requestUrl = GoogleAnalyticsConstants.BASE_URL + GoogleAnalyticsConstants.BATCH_ENDPOINT;
-            }
-
-            entity = new StringEntity(requestString, StandardCharsets.ISO_8859_1);
+        // Determine the request endpoint
+        String requestUrl = overrideUrl;
+        if (StringUtils.isBlank(requestUrl)) {
+            requestUrl = GoogleAnalyticsConstants.BASE_URL + GoogleAnalyticsConstants.COLLECT_ENDPOINT;
         }
+        URIBuilder uriBuilder = new URIBuilder(requestUrl);
 
-        return this.createRequest(requestUrl, entity);
+        // This transformer class provides access to manipulate/retrieve the query parameters and payload for requests to GA4
+        GoogleAnalyticsRequestTransformer transformer = new GoogleAnalyticsRequestTransformer(gson, apiSecret, measurementId, phoneHomeRequestBody);
 
-    }
+        // Build the GA4 server URI with the required query parameters
+        List<NameValuePair> parameters = transformer.getParameters();
+        uriBuilder.addParameters(parameters);
 
-    public HttpPost createRequest(String url, HttpEntity httpEntity) {
-        HttpPost post = new HttpPost(url);
+        // Create HTTP POST for the built URI
+        HttpPost httpPost = new HttpPost(uriBuilder.build());
 
-        post.setEntity(httpEntity);
-        // TODO post.addHeader(HttpHeaders.ACCEPT, ContentType.TEXT_PLAIN.getMimeType());
+        // Set content type
+        httpPost.setHeader("Content-Type", "application/json");
 
-        return post;
+        // Build the POST request payload as a StringEntity and set this entity for the request
+        JsonObject payloadJson = transformer.getPayload();
+        StringEntity payload = new StringEntity(payloadJson.toString());
+        httpPost.setEntity(payload);
+
+        return httpPost;
     }
 
     private List<NameValuePair> createModuleParameters(List<NameValuePair> parameters, String module) {

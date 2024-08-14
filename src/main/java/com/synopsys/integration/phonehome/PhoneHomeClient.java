@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.synopsys.integration.log.IntLogger;
 import com.synopsys.integration.phonehome.exception.PhoneHomeException;
 import com.synopsys.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
-import com.synopsys.integration.phonehome.google.analytics.TrackingId;
+import com.synopsys.integration.phonehome.google.analytics.MeasurementId;
 import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
 
 import org.apache.commons.lang3.BooleanUtils;
@@ -32,17 +32,19 @@ public class PhoneHomeClient {
     private final HttpClientBuilder httpClientBuilder;
     private final IntLogger logger;
     private final Gson gson;
-    private final TrackingId trackingId;
+    private final MeasurementId measurementID;
+    private final String apiSecret;
 
-    public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, String trackingId) {
-        this(logger, httpClientBuilder, gson, new TrackingId(trackingId));
+    public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, String apiSecret, String measurementID) {
+        this(logger, httpClientBuilder, gson, apiSecret, new MeasurementId(measurementID));
     }
 
-    public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, TrackingId trackingId) {
+    public PhoneHomeClient(IntLogger logger, HttpClientBuilder httpClientBuilder, Gson gson, String apiSecret, MeasurementId measurementID) {
         this.httpClientBuilder = httpClientBuilder;
         this.logger = logger;
         this.gson = gson;
-        this.trackingId = trackingId;
+        this.apiSecret = apiSecret;
+        this.measurementID = measurementID;
     }
 
     public void postPhoneHomeRequest(PhoneHomeRequestBody phoneHomeRequestBody, Map<String, String> environmentVariables) throws PhoneHomeException {
@@ -61,7 +63,7 @@ public class PhoneHomeClient {
             if (overrideUrl != null) {
                 logger.debug("Overriding Phone-Home URL: " + overrideUrl);
             }
-            HttpUriRequest request = requestHelper.createRequest(phoneHomeRequestBody, overrideUrl, trackingId.getId());
+            HttpUriRequest request = requestHelper.createRequest(phoneHomeRequestBody, overrideUrl, apiSecret, measurementID.getId());
 
             logger.debug("Phoning home to " + request.getURI());
             HttpResponse response = client.execute(request);

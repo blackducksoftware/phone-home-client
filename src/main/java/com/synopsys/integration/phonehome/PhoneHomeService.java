@@ -64,10 +64,10 @@ public class PhoneHomeService {
         public Boolean call() {
             Boolean result = Boolean.FALSE;
             try {
-                logger.debug("starting phone home");
+                logger.debug("Starting phone home");
                 phoneHomeClient.postPhoneHomeRequest(phoneHomeRequestBody, environmentVariables);
                 result = Boolean.TRUE;
-                logger.debug("completed phone home");
+                logger.debug("Completed phone home");
             } catch (Exception ex) {
                 logger.debug("Phone home error.", ex);
             }
