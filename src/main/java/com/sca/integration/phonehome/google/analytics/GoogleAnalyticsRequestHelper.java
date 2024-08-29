@@ -5,11 +5,11 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.blackduck.integration.phonehome.google.analytics;
+package com.sca.integration.phonehome.google.analytics;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
+import com.sca.integration.phonehome.request.PhoneHomeRequestBody;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpPost;

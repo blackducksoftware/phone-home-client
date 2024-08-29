@@ -1,6 +1,6 @@
-package com.blackduck.integration.phonehome.request;
+package com.sca.integration.phonehome.request;
 
-import com.blackduck.integration.phonehome.UniquePhoneHomeProduct;
+import com.sca.integration.phonehome.UniquePhoneHomeProduct;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

@@ -5,7 +5,7 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.blackduck.integration.phonehome.exception;
+package com.sca.integration.phonehome.exception;
 
 public class PhoneHomeException extends Exception {
     private static final long serialVersionUID = 678249589814131943L;

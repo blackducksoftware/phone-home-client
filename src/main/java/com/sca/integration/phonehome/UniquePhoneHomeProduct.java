@@ -5,7 +5,7 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.blackduck.integration.phonehome;
+package com.sca.integration.phonehome;
 
 import com.synopsys.integration.util.Stringable;
 

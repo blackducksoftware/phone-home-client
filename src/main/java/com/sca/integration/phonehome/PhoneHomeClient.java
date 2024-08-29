@@ -5,14 +5,14 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.blackduck.integration.phonehome;
+package com.sca.integration.phonehome;
 
-import com.blackduck.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
+import com.sca.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
 import com.google.gson.Gson;
 import com.synopsys.integration.log.IntLogger;
-import com.blackduck.integration.phonehome.exception.PhoneHomeException;
-import com.blackduck.integration.phonehome.google.analytics.MeasurementId;
-import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
+import com.sca.integration.phonehome.exception.PhoneHomeException;
+import com.sca.integration.phonehome.google.analytics.MeasurementId;
+import com.sca.integration.phonehome.request.PhoneHomeRequestBody;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.http.HttpResponse;

@@ -5,9 +5,9 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.blackduck.integration.phonehome.request;
+package com.sca.integration.phonehome.request;
 
-import com.blackduck.integration.phonehome.UniquePhoneHomeProduct;
+import com.sca.integration.phonehome.UniquePhoneHomeProduct;
 import com.synopsys.integration.util.NameVersion;
 
 import java.util.Collections;
