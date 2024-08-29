@@ -1,4 +1,4 @@
-package com.sca.integration.phonehome;
+package com.blackduck.integration.phonehome;
 
 import org.junit.jupiter.api.Test;
 
