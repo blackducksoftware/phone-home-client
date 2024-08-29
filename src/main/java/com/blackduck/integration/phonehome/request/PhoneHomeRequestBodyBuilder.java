@@ -5,17 +5,17 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.synopsys.integration.phonehome.request;
+package com.blackduck.integration.phonehome.request;
 
-import com.synopsys.integration.phonehome.UniquePhoneHomeProduct;
+import com.blackduck.integration.phonehome.UniquePhoneHomeProduct;
 import com.synopsys.integration.util.NameVersion;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
-import static com.synopsys.integration.phonehome.request.PhoneHomeRequestBody.MAX_META_DATA_CHARACTERS;
-import static com.synopsys.integration.phonehome.request.PhoneHomeRequestBody.UNKNOWN_FIELD_VALUE;
+import static com.blackduck.integration.phonehome.request.PhoneHomeRequestBody.MAX_META_DATA_CHARACTERS;
+import static com.blackduck.integration.phonehome.request.PhoneHomeRequestBody.UNKNOWN_FIELD_VALUE;
 
 public class PhoneHomeRequestBodyBuilder {
     private final String customerId;

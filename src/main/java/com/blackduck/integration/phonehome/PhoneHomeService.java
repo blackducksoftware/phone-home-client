@@ -5,10 +5,10 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.synopsys.integration.phonehome;
+package com.blackduck.integration.phonehome;
 
 import com.synopsys.integration.log.IntLogger;
-import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
+import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
 import com.synopsys.integration.util.NoThreadExecutorService;
 
 import java.util.Collections;

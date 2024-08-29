@@ -5,17 +5,16 @@
  *
  * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.synopsys.integration.phonehome;
+package com.blackduck.integration.phonehome;
 
+import com.blackduck.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
 import com.google.gson.Gson;
 import com.synopsys.integration.log.IntLogger;
-import com.synopsys.integration.phonehome.exception.PhoneHomeException;
-import com.synopsys.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
-import com.synopsys.integration.phonehome.google.analytics.MeasurementId;
-import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
+import com.blackduck.integration.phonehome.exception.PhoneHomeException;
+import com.blackduck.integration.phonehome.google.analytics.MeasurementId;
+import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
 
 import org.apache.commons.lang3.BooleanUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -26,8 +25,6 @@ import java.util.Map;
 public class PhoneHomeClient {
     public static final String BLACKDUCK_SKIP_PHONE_HOME_VARIABLE = "BLACKDUCK_SKIP_PHONE_HOME";
     public static final String BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE = "BLACKDUCK_PHONE_HOME_URL_OVERRIDE";
-    public static final String SKIP_PHONE_HOME_VARIABLE = "SYNOPSYS_SKIP_PHONE_HOME";
-    public static final String PHONE_HOME_URL_OVERRIDE_VARIABLE = "SYNOPSYS_PHONE_HOME_URL_OVERRIDE";
 
     private final HttpClientBuilder httpClientBuilder;
     private final IntLogger logger;
@@ -74,25 +71,15 @@ public class PhoneHomeClient {
     }
 
     private boolean skipPhoneHome(Map<String, String> environmentVariables) {
-        if (environmentVariables.containsKey(SKIP_PHONE_HOME_VARIABLE) || environmentVariables.containsKey(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE)) {
-            String valueString = environmentVariables.get(SKIP_PHONE_HOME_VARIABLE);
-            if (StringUtils.isBlank(valueString)) {
-                valueString = environmentVariables.get(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE);
-            }
+        if (environmentVariables.containsKey(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE)) {
+            String valueString = environmentVariables.get(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE);
             return BooleanUtils.toBoolean(valueString);
         }
         return false;
     }
 
     private String checkOverridePhoneHomeUrl(Map<String, String> environmentVariables) {
-        String overrideUrl;
-
-        overrideUrl = environmentVariables.get(PHONE_HOME_URL_OVERRIDE_VARIABLE);
-        if (StringUtils.isBlank(overrideUrl)) {
-            overrideUrl = environmentVariables.get(BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE);
-        }
-
-        return overrideUrl;
+        return environmentVariables.get(BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE);
     }
 
 }

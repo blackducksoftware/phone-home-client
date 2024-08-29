@@ -1,6 +1,6 @@
-package com.synopsys.integration.phonehome.request;
+package com.blackduck.integration.phonehome.request;
 
-import com.synopsys.integration.phonehome.UniquePhoneHomeProduct;
+import com.blackduck.integration.phonehome.UniquePhoneHomeProduct;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
