@@ -15,6 +15,7 @@ import com.blackduck.integration.phonehome.google.analytics.MeasurementId;
 import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -25,7 +26,8 @@ import java.util.Map;
 public class PhoneHomeClient {
     public static final String BLACKDUCK_SKIP_PHONE_HOME_VARIABLE = "BLACKDUCK_SKIP_PHONE_HOME";
     public static final String BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE = "BLACKDUCK_PHONE_HOME_URL_OVERRIDE";
-
+    public static final String SKIP_PHONE_HOME_VARIABLE = "SYNOPSYS_SKIP_PHONE_HOME";
+    public static final String PHONE_HOME_URL_OVERRIDE_VARIABLE = "SYNOPSYS_PHONE_HOME_URL_OVERRIDE";
     private final HttpClientBuilder httpClientBuilder;
     private final IntLogger logger;
     private final Gson gson;
@@ -71,15 +73,24 @@ public class PhoneHomeClient {
     }
 
     private boolean skipPhoneHome(Map<String, String> environmentVariables) {
-        if (environmentVariables.containsKey(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE)) {
-            String valueString = environmentVariables.get(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE);
+        if (environmentVariables.containsKey(SKIP_PHONE_HOME_VARIABLE) || environmentVariables.containsKey(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE)) {
+            String valueString = environmentVariables.get(SKIP_PHONE_HOME_VARIABLE);
+            if (StringUtils.isBlank(valueString)) {
+                valueString = environmentVariables.get(BLACKDUCK_SKIP_PHONE_HOME_VARIABLE);
+            }
             return BooleanUtils.toBoolean(valueString);
         }
         return false;
     }
 
     private String checkOverridePhoneHomeUrl(Map<String, String> environmentVariables) {
-        return environmentVariables.get(BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE);
+        String overrideUrl;
+        overrideUrl = environmentVariables.get(PHONE_HOME_URL_OVERRIDE_VARIABLE);
+        if (StringUtils.isBlank(overrideUrl)) {
+            overrideUrl = environmentVariables.get(BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE);
+        }
+
+        return overrideUrl;
     }
 
 }
