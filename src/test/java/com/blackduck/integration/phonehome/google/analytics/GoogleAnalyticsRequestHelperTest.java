@@ -1,9 +1,9 @@
 package com.blackduck.integration.phonehome.google.analytics;
 
-import com.google.gson.Gson;
-import com.synopsys.integration.log.LogLevel;
-import com.synopsys.integration.log.PrintStreamIntLogger;
 import com.blackduck.integration.phonehome.request.PhoneHomeRequestBodyBuilder;
+import com.google.gson.Gson;
+import com.blackduck.integration.log.LogLevel;
+import com.blackduck.integration.log.PrintStreamIntLogger;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;

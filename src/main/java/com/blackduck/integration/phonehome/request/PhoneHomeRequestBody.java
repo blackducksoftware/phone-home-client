@@ -8,7 +8,7 @@
 package com.blackduck.integration.phonehome.request;
 
 import com.blackduck.integration.phonehome.UniquePhoneHomeProduct;
-import com.synopsys.integration.util.NameVersion;
+import com.blackduck.integration.util.NameVersion;
 
 import java.util.Collections;
 import java.util.List;

@@ -7,7 +7,7 @@
  */
 package com.blackduck.integration.phonehome;
 
-import com.synopsys.integration.util.Stringable;
+import com.blackduck.integration.util.Stringable;
 
 import java.util.HashSet;
 import java.util.Set;

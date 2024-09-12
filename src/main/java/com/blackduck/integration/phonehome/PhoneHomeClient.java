@@ -7,13 +7,12 @@
  */
 package com.blackduck.integration.phonehome;
 
-import com.blackduck.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
-import com.google.gson.Gson;
-import com.synopsys.integration.log.IntLogger;
 import com.blackduck.integration.phonehome.exception.PhoneHomeException;
+import com.blackduck.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
 import com.blackduck.integration.phonehome.google.analytics.MeasurementId;
 import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
-
+import com.google.gson.Gson;
+import com.blackduck.integration.log.IntLogger;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;

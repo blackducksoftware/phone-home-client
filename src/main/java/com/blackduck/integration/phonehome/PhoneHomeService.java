@@ -7,9 +7,9 @@
  */
 package com.blackduck.integration.phonehome;
 
-import com.synopsys.integration.log.IntLogger;
 import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
-import com.synopsys.integration.util.NoThreadExecutorService;
+import com.blackduck.integration.log.IntLogger;
+import com.blackduck.integration.util.NoThreadExecutorService;
 
 import java.util.Collections;
 import java.util.Map;

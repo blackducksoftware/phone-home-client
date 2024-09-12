@@ -8,7 +8,7 @@
 package com.blackduck.integration.phonehome.request;
 
 import com.blackduck.integration.phonehome.UniquePhoneHomeProduct;
-import com.synopsys.integration.util.NameVersion;
+import com.blackduck.integration.util.NameVersion;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.Nullable;
 
