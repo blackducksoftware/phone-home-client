@@ -1,13 +1,13 @@
 package com.blackduck.integration.phonehome;
 
+import com.blackduck.integration.log.BufferedIntLogger;
+import com.blackduck.integration.log.LogLevel;
+import com.blackduck.integration.log.PrintStreamIntLogger;
 import com.blackduck.integration.phonehome.exception.PhoneHomeException;
 import com.blackduck.integration.phonehome.google.analytics.GoogleAnalyticsConstants;
 import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
 import com.blackduck.integration.phonehome.request.PhoneHomeRequestBodyBuilder;
 import com.google.gson.Gson;
-import com.blackduck.integration.log.BufferedIntLogger;
-import com.blackduck.integration.log.LogLevel;
-import com.blackduck.integration.log.PrintStreamIntLogger;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
