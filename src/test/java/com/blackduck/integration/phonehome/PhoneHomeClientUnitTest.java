@@ -32,7 +32,7 @@ public class PhoneHomeClientUnitTest {
         logger.info("\n");
         logger.info("Test Class: PhoneHomeClientUnitTest");
         defaultEnvironmentVariables = new HashMap<>();
-        defaultEnvironmentVariables.put(PhoneHomeClient.BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE, GoogleAnalyticsConstants.BASE_URL + GoogleAnalyticsConstants.DEBUG_ENDPOINT);
+        defaultEnvironmentVariables.put(PhoneHomeClient.PHONE_HOME_URL_OVERRIDE_VARIABLE, GoogleAnalyticsConstants.BASE_URL + GoogleAnalyticsConstants.DEBUG_ENDPOINT);
         defaultClient = new PhoneHomeClient(logger, HttpClientBuilder.create(), new Gson(), TEST_GA4_API_SECRET, TEST_GA4_MEASUREMENT_ID);
     }
 
@@ -54,12 +54,12 @@ public class PhoneHomeClientUnitTest {
             .createForProduct(UniquePhoneHomeProduct.CODE_CENTER, "artifactId", "customerId", "hostName", "artifactVersion", "productVersion")
             .build();
 
-        defaultEnvironmentVariables.put(PhoneHomeClient.BLACKDUCK_SKIP_PHONE_HOME_VARIABLE, "true");
+        defaultEnvironmentVariables.put(PhoneHomeClient.SKIP_PHONE_HOME_VARIABLE, "true");;
 
         clientWithTrackableLogger.postPhoneHomeRequest(phoneHomeRequest, defaultEnvironmentVariables);
         assertTrue(logger.getOutputString(LogLevel.DEBUG).contains("Skipping phone home"));
 
-        defaultEnvironmentVariables.put(PhoneHomeClient.BLACKDUCK_SKIP_PHONE_HOME_VARIABLE, "false");
+        defaultEnvironmentVariables.put(PhoneHomeClient.SKIP_PHONE_HOME_VARIABLE, "false");
 
         clientWithTrackableLogger.postPhoneHomeRequest(phoneHomeRequest, defaultEnvironmentVariables);
         assertTrue(logger.getOutputString(LogLevel.DEBUG).contains("Phoning home to "));
