@@ -54,7 +54,7 @@ public class PhoneHomeClientUnitTest {
             .createForProduct(UniquePhoneHomeProduct.CODE_CENTER, "artifactId", "customerId", "hostName", "artifactVersion", "productVersion")
             .build();
 
-        defaultEnvironmentVariables.put(PhoneHomeClient.SKIP_PHONE_HOME_VARIABLE, "true");;
+        defaultEnvironmentVariables.put(PhoneHomeClient.SKIP_PHONE_HOME_VARIABLE, "true");
 
         clientWithTrackableLogger.postPhoneHomeRequest(phoneHomeRequest, defaultEnvironmentVariables);
         assertTrue(logger.getOutputString(LogLevel.DEBUG).contains("Skipping phone home"));
