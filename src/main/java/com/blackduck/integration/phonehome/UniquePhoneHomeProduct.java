@@ -1,13 +1,13 @@
 /*
  * phone-home-client
  *
- * Copyright (c) 2024 Synopsys, Inc.
+ * Copyright (c) 2024 Black Duck Software, Inc.
  *
- * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
+ * Use subject to the terms and conditions of the Black Duck Software End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.synopsys.integration.phonehome;
+package com.blackduck.integration.phonehome;
 
-import com.synopsys.integration.util.Stringable;
+import com.blackduck.integration.util.Stringable;
 
 import java.util.HashSet;
 import java.util.Set;

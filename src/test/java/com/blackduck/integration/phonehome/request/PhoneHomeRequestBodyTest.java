@@ -1,14 +1,12 @@
-package com.synopsys.integration.phonehome.request;
+package com.blackduck.integration.phonehome.request;
 
-import com.synopsys.integration.phonehome.UniquePhoneHomeProduct;
+import com.blackduck.integration.phonehome.UniquePhoneHomeProduct;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PhoneHomeRequestBodyTest {
     @Test

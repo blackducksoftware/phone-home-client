@@ -1,19 +1,18 @@
 /*
  * phone-home-client
  *
- * Copyright (c) 2024 Synopsys, Inc.
+ * Copyright (c) 2024 Black Duck Software, Inc.
  *
- * Use subject to the terms and conditions of the Synopsys End User Software License and Maintenance Agreement. All rights reserved worldwide.
+ * Use subject to the terms and conditions of the Black Duck Software End User Software License and Maintenance Agreement. All rights reserved worldwide.
  */
-package com.synopsys.integration.phonehome;
+package com.blackduck.integration.phonehome;
 
+import com.blackduck.integration.log.IntLogger;
+import com.blackduck.integration.phonehome.exception.PhoneHomeException;
+import com.blackduck.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
+import com.blackduck.integration.phonehome.google.analytics.MeasurementId;
+import com.blackduck.integration.phonehome.request.PhoneHomeRequestBody;
 import com.google.gson.Gson;
-import com.synopsys.integration.log.IntLogger;
-import com.synopsys.integration.phonehome.exception.PhoneHomeException;
-import com.synopsys.integration.phonehome.google.analytics.GoogleAnalyticsRequestHelper;
-import com.synopsys.integration.phonehome.google.analytics.MeasurementId;
-import com.synopsys.integration.phonehome.request.PhoneHomeRequestBody;
-
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpResponse;
@@ -28,7 +27,6 @@ public class PhoneHomeClient {
     public static final String BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE = "BLACKDUCK_PHONE_HOME_URL_OVERRIDE";
     public static final String SKIP_PHONE_HOME_VARIABLE = "SYNOPSYS_SKIP_PHONE_HOME";
     public static final String PHONE_HOME_URL_OVERRIDE_VARIABLE = "SYNOPSYS_PHONE_HOME_URL_OVERRIDE";
-
     private final HttpClientBuilder httpClientBuilder;
     private final IntLogger logger;
     private final Gson gson;
@@ -86,7 +84,6 @@ public class PhoneHomeClient {
 
     private String checkOverridePhoneHomeUrl(Map<String, String> environmentVariables) {
         String overrideUrl;
-
         overrideUrl = environmentVariables.get(PHONE_HOME_URL_OVERRIDE_VARIABLE);
         if (StringUtils.isBlank(overrideUrl)) {
             overrideUrl = environmentVariables.get(BLACKDUCK_PHONE_HOME_URL_OVERRIDE_VARIABLE);
